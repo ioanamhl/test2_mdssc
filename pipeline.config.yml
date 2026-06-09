@@ -21,7 +21,7 @@ jenkins_mode: "docker"
 
 # Completează după ce pornești tunelul cloudflared:
 #   cloudflared tunnel --url http://localhost:8080
-jenkins_url: "https://summit-star-insights-study.trycloudflare.com"
+jenkins_url: "https://internship-infrared-phil-mil.trycloudflare.com"
 jenkins_port: 8080
 jenkins_job: "test2-mdssc-pipeline"
 
