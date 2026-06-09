@@ -292,7 +292,7 @@ pipeline {
                     if (cfg.deploy_method == 'pm2') {
                         sh """
                             pm2 restart ${projectName} 2>/dev/null || \\
-                            pm2 start ${WORKSPACE}/${cfg.backend_dir ?: 'backend'}/server.js \\
+                            pm2 start ${WORKSPACE}/${cfg.backend_dir ?: 'backend'}/${cfg.backend_entry ?: 'server.js'} \\
                                 --name ${projectName} \\
                                 --cwd  ${WORKSPACE}/${cfg.backend_dir ?: 'backend'}
                             pm2 save

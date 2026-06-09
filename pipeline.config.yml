@@ -27,6 +27,7 @@ jenkins_job: "test2-mdssc-pipeline"
 
 # ── Deploy ────────────────────────────────────────────────────────────────────
 deploy_method: "pm2"
+backend_entry: "index.js"
 
 # ── MDSSC ─────────────────────────────────────────────────────────────────────
 mdssc_threshold: "none"
