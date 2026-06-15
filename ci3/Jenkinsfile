@@ -159,21 +159,23 @@ pipeline {
                             def tasks = [:]
                             if (hasBackend) {
                                 tasks['Backend — npm ci'] = {
-                                    dir('Backend') { sh 'npm ci' }
+                                    dir('Backend') {
+                                        sh 'export PATH=/usr/local/bin:/usr/bin:/bin:$PATH && npm ci'
+                                    }
                                 }
                             }
                             if (hasFrontend) {
                                 tasks['Frontend — npm ci + build'] = {
                                     dir('frontend') {
-                                        sh 'npm ci'
-                                        sh cmd ?: 'npm run build'
+                                        sh 'export PATH=/usr/local/bin:/usr/bin:/bin:$PATH && npm ci'
+                                        sh "export PATH=/usr/local/bin:/usr/bin:/bin:\$PATH && ${cmd ?: 'npm run build'}"
                                     }
                                 }
                             }
                             parallel tasks
                         } else {
-                            sh 'npm ci'
-                            if (cmd) sh cmd
+                            sh 'export PATH=/usr/local/bin:/usr/bin:/bin:$PATH && npm ci'
+                            if (cmd) sh "export PATH=/usr/local/bin:/usr/bin:/bin:\$PATH && ${cmd}"
                         }
                     } else if (params.STACK == 'python') {
                         sh 'pip install -r requirements.txt'
