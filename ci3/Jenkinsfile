@@ -85,6 +85,7 @@ pipeline {
         ARTIFACT_DIR   = 'artifacts'
         MDSSC_INSTANCE = 'http://35.156.106.42/'
         MDSSC_WF_ID    = '6a27260e006f2db36a982671'
+        PATH           = "/usr/local/bin:/usr/bin:/bin:${env.PATH}"
     }
 
     stages {
