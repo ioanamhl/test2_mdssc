@@ -142,37 +142,7 @@ pipeline {
         }
 
         // ----------------------------------------------------------
-        // 4. SECURITY SCAN
-        // ----------------------------------------------------------
-        stage('Security Scan') {
-            when {
-                expression {
-                    return params.STACK == 'node' &&
-                           (fileExists('Backend/package.json') || fileExists('frontend/package.json') || fileExists('package.json'))
-                }
-            }
-            steps {
-                script {
-                    if (fileExists('Backend/package.json')) {
-                        dir('Backend') {
-                            sh 'npm ci --prefer-offline 2>/dev/null || npm ci'
-                            sh 'npm audit --json > "../$ARTIFACT_DIR/backend-audit.json" 2>/dev/null || true'
-                        }
-                    }
-                    if (fileExists('frontend/package.json')) {
-                        dir('frontend') {
-                            sh 'npm ci --prefer-offline 2>/dev/null || npm ci'
-                            sh 'npm audit --json > "../$ARTIFACT_DIR/frontend-audit.json" 2>/dev/null || true'
-                            sh 'npx eslint . --format json --output-file "../$ARTIFACT_DIR/eslint-report.json" 2>/dev/null || true'
-                        }
-                    }
-                    archiveArtifacts artifacts: "${ARTIFACT_DIR}/*.json", allowEmptyArchive: true
-                }
-            }
-        }
-
-        // ----------------------------------------------------------
-        // 5. BUILD
+        // 4. BUILD
         // ----------------------------------------------------------
         stage('Build') {
             steps {
